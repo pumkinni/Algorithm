@@ -2,21 +2,24 @@ class Solution {
     public int[] solution(int[] sequence, int k) {
         int[] answer = new int[]{0, sequence.length};
         
-        int l = 0;
-        int r = 0;
+        int s = 0;
+        int e = 0;
         int sum = 0;
         
-        while (l < sequence.length){
-            while (r < sequence.length && sum < k){
-                sum += sequence[r++];
+        while (s < sequence.length &&  e - 1 < sequence.length){
+            
+            while (e < sequence.length && sum < k){
+                sum += sequence[e++];
+            }
+                        
+            if (sum == k){
+                if (answer[1] - answer[0] > e - s - 1){
+                    answer[0] = s;
+                    answer[1] = e - 1;
+                }
             }
             
-            
-            if (sum == k && answer[1] - answer[0] > r-l-1){
-                answer = new int[]{l, r-1};
-            }
-            
-            sum -= sequence[l++];
+            sum -= sequence[s++];  
         }
         
         
